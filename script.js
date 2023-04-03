@@ -198,7 +198,24 @@ function showWeatherData(data) {
     }
   })
 }
+window.addEventListener('load', function() {
+  // Hide the loader once the page has finished loading
+  document.querySelector('.pl').style.display = 'none';
+});
+// show the loader and overlay
+document.addEventListener('DOMContentLoaded', function() {
+  const loader = document.querySelector('.pl');
+  const overlay = document.querySelector('#loader-overlay');
+  loader.style.display = 'block';
+  overlay.style.display = 'block';
+});
 
-
+// hide the loader and overlay when loading is complete
+window.addEventListener('load', function() {
+  const loader = document.querySelector('.pl');
+  const overlay = document.querySelector('#loader-overlay');
+  loader.style.display = 'none';
+  overlay.style.display = 'none';
+});
 
 getWeatherData();
