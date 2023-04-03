@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather WebApp</title>
+    <link rel="icon" type="image/png" href="weather_windgust.png">
+</head>
+
+<body>
+    <div class="container">
+        <div class="current-info">
+            <div class="date-container">
+                <div class="time" id="time">
+                    12:00 <span id="am-pm">PM</span>
+                </div>
+                <div class="date" id="date">
+                    Monday, 20 March
+                </div>
+                <div class="others" id="current-weather-items">
+
+                </div>
+            </div>
+            <div class="place_container">
+                <div class="time-zone" id="time-zone">
+                    Asia/Kolkata
+                </div>
+                <div id="city">
+                    New Delhi
+                </div>
+                <div class="country" id="country">
+                    IND
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="future-forecast">
+        <div class="today" id="current_temp">
+            <img src="https://cdn.weatherapi.com/weather/64x64/day/116.png" alt="weather icon" class="w_icon">
+            <div class="other">
+                <div class="day">Monday</div>
+                <div class="temp">Night - 22.1&#176; C</div>
+                <div class="temp">Day - 22.1&#176; C</div>
+            </div>
+        </div>
+        <div class="weather-forecast" id="weather-forecast">
+            <div class="weather-forecast-item">
+                <div class="day">Tuesday</div>
+                <div class="today" id="current_temp"><img src="https://cdn.weatherapi.com/weather/64x64/day/116.png"
+                        alt="weather icon" class="w_icon"></div>
+                <div class="temp">Night - 22.1&#176; C</div>
+                <div class="temp">Day - 22.1&#176; C</div>
+            </div>
+            <div class="weather-forecast-item">
+                <div class="day">Wednesday</div>
+                <div class="today" id="current_temp"><img src="https://cdn.weatherapi.com/weather/64x64/day/116.png"
+                        alt="weather icon" class="w_icon"></div>
+                <div class="temp">Night - 22.1&#176; C</div>
+                <div class="temp">Day - 22.1&#176; C</div>
+            </div>
+
+        </div>
+        <!-- If i want to add text regarding me -->
+        <!-- <div class="card">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="card-inner">A Project by Abhishek Sharma</div>
+        </div> -->
+        <script src="script.js"></script>
+</body>
+
+</html>
