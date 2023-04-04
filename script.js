@@ -8,6 +8,7 @@ const currentTempEl = document.getElementById("current-temp");
 const currentCity = document.getElementById("city");
 const futureForecast = document.getElementById("current_temp");
 const otherDayForecast = document.getElementById("weather-forecast");
+const backgroundChanger = document.querySelector("body")
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June', 'July',
@@ -63,6 +64,7 @@ function showWeatherData(data) {
   const iconToday = data.current.condition.icon;
   const dayTemp = data.forecast.forecastday[0].date;
   const dateTemp = new Date(dayTemp);
+  const todayRain = data.forecast.forecastday[0].daily_chance_of_rain;
   //    const dateString = data.location.localtime;
   // const date = new Date(dateString);
   // const timeString = date.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute:'2-digit' });
@@ -136,7 +138,9 @@ function showWeatherData(data) {
     return Math.round(aqi);
   }
 
-
+if(data.current.is_day===1){
+  backgroundChanger.style.background = "url(alessandro-pacilio-dZdYGdDrdfM-unsplash.jpg) no-repeat center center/cover"
+}
   timezone.innerHTML = `${timearea}`
   countryEl.innerHTML = `${nameCountry}`
   currentCity.innerHTML = `${city_here}, ${currentRegion}`
@@ -172,8 +176,9 @@ function showWeatherData(data) {
                 <div class="condition">${condition}</div>
                 <div class="temp">Temperature:  ${isright}&#176; C</div>
                 <div class="temp">Feels Like:  ${feels}&#176; C</div>
+                
             </div>`
-    }
+    }// <div class="temp">Chance of Rain:  ${todayRain}%</div>//for adding today rain functionality
     else {
       const iconOther1 = data.forecast.forecastday[idx].day.condition.icon;
       const iconOther2 = data.forecast.forecastday[idx + 1].day.condition.icon;
