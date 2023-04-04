@@ -40,7 +40,7 @@ function getWeatherData() {
     const { latitude, longitude } = success.coords;
 
     fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${latitude},${longitude}&days=12&aqi=yes&alerts=yes`).then(res => res.json()).then(data => {
-      console.log(data);
+      // console.log(data);
       showWeatherData(data);
     })
   })
@@ -61,7 +61,8 @@ function showWeatherData(data) {
   const pm10 = data.current.air_quality.pm10;
   const so2 = data.current.air_quality.so2;
   const iconToday = data.current.condition.icon;
-  const day = data.current.is_day;
+  const dayTemp = data.forecast.forecastday[0].date;
+  const dateTemp = new Date(dayTemp);
   //    const dateString = data.location.localtime;
   // const date = new Date(dateString);
   // const timeString = date.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute:'2-digit' });
@@ -167,7 +168,7 @@ function showWeatherData(data) {
         `<div class="today" id="current_temp">
             <img src="https://${iconToday}" alt="weather icon" class="w_icon">
             <div class="other">
-                <div class="day">${days[day]}</div>
+                <div class="day">${days[dateTemp.getDay()]}</div>
                 <div class="condition">${condition}</div>
                 <div class="temp">Temperature:  ${isright}&#176; C</div>
                 <div class="temp">Feels Like:  ${feels}&#176; C</div>
@@ -182,14 +183,14 @@ function showWeatherData(data) {
       const chanceofRain1 = data.forecast.forecastday[idx].day.daily_chance_of_rain;
       otherDayForecast.innerHTML = `<div class="weather-forecast" id="weather-forecast">
     <div class="weather-forecast-item">
-        <div class="day">${days[day + 1]}</div>
+        <div class="day">${days[dateTemp.getDay() + 1]}</div>
         <div class="today" id="current_temp"><img src="https://${iconOther1}"
                 alt="weather icon" class="w_icon"></div>
         <div class="temp">Temperature:  ${avgTemp1}&#176; C</div>
         <div class="temp">Chance of Rain:  ${chanceofRain1}%</div>
     </div>
     <div class="weather-forecast-item">
-        <div class="day">${days[day + 2]}</div>
+        <div class="day">${days[dateTemp.getDay() + 2]}</div>
         <div class="today" id="current_temp"><img src="https://${iconOther2}"
                 alt="weather icon" class="w_icon"></div>
                 <div class="temp">Temperature:  ${avgTemp2}&#176; C</div>
