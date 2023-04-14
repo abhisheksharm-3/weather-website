@@ -139,7 +139,7 @@ function showWeatherData(data) {
   }
 
 if(data.current.is_day===1){
-  backgroundChanger.style.background = "url(alessandro-pacilio-dZdYGdDrdfM-unsplash.jpg) no-repeat center center/cover"
+  backgroundChanger.style.background = "url(gregoire-jeanneau-5aN_QNPSIdA-unsplash.jpg) no-repeat center center/cover"
 }
   timezone.innerHTML = `${timearea}`
   countryEl.innerHTML = `${nameCountry}`
@@ -188,14 +188,14 @@ if(data.current.is_day===1){
       const chanceofRain1 = data.forecast.forecastday[idx].day.daily_chance_of_rain;
       otherDayForecast.innerHTML = `<div class="weather-forecast" id="weather-forecast">
     <div class="weather-forecast-item">
-        <div class="day">${days[dateTemp.getDay() + 1]}</div>
+        <div class="day">${days[(dateTemp.getDay() + 1)%7]}</div>
         <div class="today" id="current_temp"><img src="https://${iconOther1}"
                 alt="weather icon" class="w_icon"></div>
         <div class="temp">Temperature:  ${avgTemp1}&#176; C</div>
         <div class="temp">Chance of Rain:  ${chanceofRain1}%</div>
     </div>
     <div class="weather-forecast-item">
-        <div class="day">${days[dateTemp.getDay() + 2]}</div>
+        <div class="day">${days[(dateTemp.getDay() + 2)%7]}</div>
         <div class="today" id="current_temp"><img src="https://${iconOther2}"
                 alt="weather icon" class="w_icon"></div>
                 <div class="temp">Temperature:  ${avgTemp2}&#176; C</div>
@@ -225,3 +225,45 @@ window.addEventListener('load', function() {
 });
 
 getWeatherData();
+
+// Search Functionality
+
+const searchInput = document.getElementById('search-input');
+const autocompleteResults = document.querySelector('.autocomplete-results');
+
+searchInput.addEventListener('input', debounce(handleInput, 300));
+
+async function handleInput() {
+  const query = searchInput.value;
+  if (!query) {
+    autocompleteResults.innerHTML = '';
+    return;
+  }
+
+  const results = await searchLocations(query);
+  renderResults(results);
+}
+
+async function searchLocations(query) {
+  const response = await fetch(`https://api.weatherapi.com/v1/search.json?key=${API_KEY}&q=${query}`);
+  const data = await response.json();
+  return data;
+}
+
+function renderResults(results) {
+  const html = results.map(result => `<li>${result.name}</li>`).join('');
+  autocompleteResults.innerHTML = html;
+}
+
+function debounce(fn, delay) {
+  let timeoutId;
+  return function(...args) {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  }
+}
+
